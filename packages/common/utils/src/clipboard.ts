@@ -1,16 +1,16 @@
 /** @tossdocs-ignore */
-import { copyToClipboard, isIE } from '.';
+import { isIE } from '.';
 
 async function writeText(text: string): Promise<boolean> {
   if (isIE() || !clipboardSupported()) {
-    return copyToClipboard(text);
+    return false;
   }
 
   try {
     await navigator.clipboard.writeText(text);
     return true;
   } catch {
-    return copyToClipboard(text);
+    return false;
   }
 }
 
